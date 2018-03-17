@@ -10,7 +10,8 @@ import com.example.sweta.assignment.R;
  * Created by sweta on 3/16/18.
  */
 
-public class MyViewHolder extends ViewHolder {
+//extend RecyclerView.ViewHolder not just ViewHolder
+public class MyViewHolder extends RecyclerView.ViewHolder {
 
     protected TextView myName,myRollNo;
 

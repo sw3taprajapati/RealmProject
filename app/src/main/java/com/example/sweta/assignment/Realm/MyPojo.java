@@ -14,6 +14,10 @@ public class MyPojo extends RealmObject {
     @PrimaryKey
     private Integer roll;
 
+    //default constructor needed if class has constructor with parameters
+    public MyPojo() {
+    }
+
     public MyPojo(String name, Integer roll) {
         this.name = name;
         this.roll = roll;
