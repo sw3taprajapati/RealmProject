@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String nameString;
     private Integer roll;
     MyPojo myPojo;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,14 +40,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setListeners();
     }
 
-    private void initComponents(){
-        nameText=findViewById(R.id.nameField);
-        rollText=findViewById(R.id.rollField);
-        btnSave=findViewById(R.id.saveBtn);
-        showList=findViewById(R.id.viewList);
+    private void initComponents() {
+        nameText = findViewById(R.id.nameField);
+        rollText = findViewById(R.id.rollField);
+        btnSave = findViewById(R.id.saveBtn);
+        showList = findViewById(R.id.viewList);
     }
 
-    private void setListeners(){
+    private void setListeners() {
         nameText.setOnClickListener(this);
         rollText.setOnClickListener(this);
         btnSave.setOnClickListener(this);
@@ -56,30 +57,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
-        if(view==btnSave){
-            nameString=nameText.getText().toString().trim();
+        if (view == btnSave) {
+            nameString = nameText.getText().toString().trim();
 
-            if(nameString.equalsIgnoreCase("")){
-                Toast.makeText(this,"Please Enter the name",Toast.LENGTH_LONG).show();
-            }else{
-                roll=Integer.parseInt(String.valueOf(rollText.getText()));
+            if (nameString.equalsIgnoreCase("")) {
+                Toast.makeText(this, "Please Enter the name", Toast.LENGTH_LONG).show();
+            } else {
 
-                if(roll==null){
-                    Toast.makeText(this,"Please Enter the roll",Toast.LENGTH_LONG).show();
-                }else{
-                    myPojo=new MyPojo(nameString, roll);
-                    initRealm();
+                String rollString = rollText.getText().toString().trim();
+                if (rollString.isEmpty()) {
+                    Toast.makeText(this, "Please Enter the roll", Toast.LENGTH_LONG).show();
+                } else {
+                    try {
 
+                        roll = Integer.parseInt(String.valueOf(rollText.getText()));
+
+                        myPojo = new MyPojo(nameString, roll);
+                        initRealm();
+
+                        Toast.makeText(this, "Successful", Toast.LENGTH_SHORT).show();
+
+                    } catch (Exception e) {
+                        Toast.makeText(this, "Please Enter roll number in integer", Toast.LENGTH_LONG).show();
+                    }
                 }
+
+
             }
-        }else if(view==showList){
-            Intent intent=new Intent(MainActivity.this,ShowListActivity.class);
+        } else if (view == showList) {
+            Intent intent = new Intent(MainActivity.this, ShowListActivity.class);
+            startActivity(intent);
         }
 
     }
 
-    private void initRealm(){
-        Realm realm= Realm.getDefaultInstance();
+    private void initRealm() {
+        Realm realm = Realm.getDefaultInstance();
 
         realm.beginTransaction();
 

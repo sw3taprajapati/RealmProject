@@ -45,7 +45,6 @@ public class ShowListActivity extends AppCompatActivity {
 
         realm= Realm.getDefaultInstance();
         myPojoList = new ArrayList<>();
-
         myRecycleView.setLayoutManager(new LinearLayoutManager(
                 this, LinearLayoutManager.VERTICAL, false));
 
@@ -53,8 +52,8 @@ public class ShowListActivity extends AppCompatActivity {
 
         myPojoList =realm.copyFromRealm(myPojoRealmResults);
 
-        MyPojo myPojo=new MyPojo();
-        myPojoList.add(myPojo);
+        realm.close();
+
         myAdapter = new MyAdapter(myPojoList);
         myRecycleView.setAdapter(myAdapter);
     }

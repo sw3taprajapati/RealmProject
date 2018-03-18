@@ -19,6 +19,11 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     List<MyPojo> myPojos;
+
+    public MyAdapter(List<MyPojo> pojos){
+
+        myPojos=pojos;
+    }
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
