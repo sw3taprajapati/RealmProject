@@ -1,5 +1,6 @@
 package com.example.sweta.assignment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }else if(view==showList){
-                    getRealm();
+            Intent intent=new Intent(MainActivity.this,ShowListActivity.class);
         }
 
     }
@@ -87,14 +88,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         realm.commitTransaction();
 
         realm.close();
-    }
-
-    private void getRealm(){
-
-        Realm realm= Realm.getDefaultInstance();
-
-        RealmResults<MyPojo> myPojoRealmResults=realm.where(MyPojo.class).findAll();
-
-        List<MyPojo> myList=realm.copyFromRealm(myPojoRealmResults);
     }
 }

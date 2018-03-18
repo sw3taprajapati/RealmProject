@@ -31,11 +31,11 @@ public class MyPojo extends RealmObject {
         this.name = name;
     }
 
-    public Integer getRoll() {
-        return roll;
-    }
-
     public void setRoll(Integer roll) {
         this.roll = roll;
+    }
+
+    public Integer getRoll() {
+        return roll;
     }
 }
