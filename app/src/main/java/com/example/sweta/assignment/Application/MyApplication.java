@@ -17,11 +17,13 @@ public class MyApplication extends Application {
         initRealm();
     }
 
-    private void initRealm(){
-        Realm.init( this);
+    private void initRealm() {
+        Realm.init(this);
 
-        RealmConfiguration realmConfiguration=new RealmConfiguration.Builder()
-                .schemaVersion(1).name("Student").deleteRealmIfMigrationNeeded()
+        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
+                .schemaVersion(1)
+                .name("Student")
+                .deleteRealmIfMigrationNeeded()
                 .build();
 
         Realm.setDefaultConfiguration(realmConfiguration);

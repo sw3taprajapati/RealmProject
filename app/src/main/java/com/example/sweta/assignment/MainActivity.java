@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView showList;
     private String nameString;
     private Integer roll;
-    MyPojo myPojo;
+    private MyPojo myPojo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,8 +48,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setListeners() {
-        nameText.setOnClickListener(this);
-        rollText.setOnClickListener(this);
         btnSave.setOnClickListener(this);
         showList.setOnClickListener(this);
     }
@@ -60,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view == btnSave) {
             nameString = nameText.getText().toString().trim();
 
-            if (nameString.equalsIgnoreCase("")) {
+            if (nameString.isEmpty()) {
                 Toast.makeText(this, "Please Enter the name", Toast.LENGTH_LONG).show();
             } else {
 
@@ -70,10 +68,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     try {
 
-                        roll = Integer.parseInt(String.valueOf(rollText.getText()));
+                        roll = Integer.parseInt(rollString);
 
                         myPojo = new MyPojo(nameString, roll);
-                        initRealm();
+                        insertToRealm();
 
                         Toast.makeText(this, "Successful", Toast.LENGTH_SHORT).show();
 
@@ -91,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void initRealm() {
+    private void insertToRealm() {
         Realm realm = Realm.getDefaultInstance();
 
         realm.beginTransaction();

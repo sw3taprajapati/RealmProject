@@ -27,6 +27,7 @@ public class ShowListActivity extends AppCompatActivity {
     private List<MyPojo> myPojoList;
     private RealmResults<MyPojo> myPojoRealmResults;
     private Realm realm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,27 +35,31 @@ public class ShowListActivity extends AppCompatActivity {
 
         initViews();
         initRecyclerView();
+        setDataToAdapter();
     }
 
-    private void initViews(){
-        myRecycleView=findViewById(R.id.recyclerView);
+    private void initViews() {
+        myRecycleView = findViewById(R.id.recyclerView);
     }
 
-
-    private void initRecyclerView(){
-
-        realm= Realm.getDefaultInstance();
-        myPojoList = new ArrayList<>();
+    private void initRecyclerView() {
         myRecycleView.setLayoutManager(new LinearLayoutManager(
                 this, LinearLayoutManager.VERTICAL, false));
 
-        myPojoRealmResults=realm.where(MyPojo.class).findAll();
-
-        myPojoList =realm.copyFromRealm(myPojoRealmResults);
-
-        realm.close();
+        myPojoList = new ArrayList<>();
 
         myAdapter = new MyAdapter(myPojoList);
         myRecycleView.setAdapter(myAdapter);
+    }
+
+    private void setDataToAdapter() {
+        realm = Realm.getDefaultInstance();
+
+        myPojoRealmResults = realm.where(MyPojo.class).findAll();
+
+        myPojoList = realm.copyFromRealm(myPojoRealmResults);
+
+        realm.close();
+        myAdapter.notifyDataSetChanged();
     }
 }
